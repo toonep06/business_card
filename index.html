@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>นามบัตรทีม - Surfsight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#2563eb'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-100">
+  <header id="mainHeader" class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+    <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="scr/logo.png" alt="Logo" class="h-10 w-10 rounded-full shadow" />
+        <span class="text-xl font-semibold text-gray-900 dark:text-white">Surfsight IoT</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-primary transition">หน้าหลัก</a>
+        <a href="?id=toon" class="text-gray-700 dark:text-gray-300 hover:text-primary transition">นามบัตรของฉัน</a>
+        <button id="themeToggle" class="text-xl text-gray-600 dark:text-gray-300 hover:text-primary">🌓</button>
+      </nav>
+      <button id="menuToggle" class="md:hidden text-gray-700 dark:text-gray-300 text-2xl">☰</button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="index.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary">หน้าหลัก</a>
+      <a href="?id=toon" class="block text-gray-700 dark:text-gray-300 hover:text-primary">นามบัตรของฉัน</a>
+      <button id="themeToggleMobile"
+        class="block w-full text-left text-gray-600 dark:text-gray-300 hover:text-primary text-lg">🌓
+        เปลี่ยนโหมดแสง</button>
+    </div>
+  </header>
+
+  <main id="cards"
+    class="max-w-screen-xl mx-auto p-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"></main>
+
+
+  <!-- Footer -->
+
+
+  <footer
+    class="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-800 text-center text-sm text-gray-500 dark:text-gray-400 border-t dark:border-gray-700 py-3 shadow-md z-50">
+    © 2025 Surfsight IoT Co., Ltd. All rights reserved.
+  </footer>
+
+  <script>
+    const profiles = {
+      toon: {
+        id: "toon",
+        name: "Toon Makkunchon",
+        position: "IoT Engineer",
+        email: "toon@example.com",
+        phone: "097-289-9851",
+        website: "www.surfsight.co",
+        business: "ระบบ IoT และ Automation",
+        address: "123/4 ถ.เทคโนโลยี แขวงนวัตกรรม เขตบางเขน กรุงเทพฯ",
+        image: "scr/toon.png"
+      },
+      jane: {
+        id: "jane",
+        name: "Jane Smith",
+        position: "Marketing Lead",
+        email: "jane@example.com",
+        phone: "080-111-2222",
+        website: "www.marketpro.com",
+        business: "Digital Marketing Agency",
+        address: "12 ซอยสุขุมวิท 40 กรุงเทพฯ",
+        image: "https://via.placeholder.com/150/FF9999"
+      },
+      alex: {
+        id: "alex",
+        name: "Alex Johnson",
+        position: "Full Stack Developer",
+        email: "alex@webdev.com",
+        phone: "088-123-4567",
+        website: "www.webdevhub.com",
+        business: "Web Application Development",
+        address: "456 ถนนราชพฤกษ์ นนทบุรี",
+        image: "https://via.placeholder.com/150/00BFFF"
+      },
+      mimi: {
+        id: "mimi",
+        name: "Mimi Tan",
+        position: "Data Analyst",
+        email: "mimi@datax.co",
+        phone: "084-567-2345",
+        website: "www.datax.co",
+        business: "Data Analytics & BI",
+        address: "789 ซอยจรัญสนิทวงศ์ กรุงเทพฯ",
+        image: "https://via.placeholder.com/150/FFB6C1"
+      },
+      benz: {
+        id: "benz",
+        name: "Benz Wattanakul",
+        position: "Embedded Engineer",
+        email: "benz@embedtech.io",
+        phone: "086-234-8989",
+        website: "www.embedtech.io",
+        business: "Embedded & Firmware Solutions",
+        address: "112 หมู่บ้านไอที ลาดพร้าว 71",
+        image: "https://via.placeholder.com/150/1E90FF"
+      },
+      fa: {
+        id: "fa",
+        name: "Farida Chaiyasit",
+        position: "UX/UI Designer",
+        email: "fa@creato.design",
+        phone: "089-989-2345",
+        website: "www.creato.design",
+        business: "UX/UI & Branding",
+        address: "88/9 ซ.รามคำแหง 24 กรุงเทพฯ",
+        image: "https://via.placeholder.com/150/DA70D6"
+      },
+      ken: {
+        id: "ken",
+        name: "Ken Nakamura",
+        position: "AI Researcher",
+        email: "ken@aihub.org",
+        phone: "087-555-1111",
+        website: "www.aihub.org",
+        business: "Artificial Intelligence Lab",
+        address: "มหาวิทยาลัยวิจัยเทคโนโลยี เชียงใหม่",
+        image: "https://via.placeholder.com/150/40E0D0"
+      },
+      sara: {
+        id: "sara",
+        name: "Sara Lim",
+        position: "Product Manager",
+        email: "sara@prodwise.com",
+        phone: "085-000-7777",
+        website: "www.prodwise.com",
+        business: "Product Strategy & Management",
+        address: "101 ถนนสีลม เขตบางรัก กรุงเทพฯ",
+        image: "https://via.placeholder.com/150/F08080"
+      },
+      max: {
+        id: "max",
+        name: "Max Nguyen",
+        position: "Cybersecurity Expert",
+        email: "max@secureit.net",
+        phone: "081-444-3333",
+        website: "www.secureit.net",
+        business: "Security Solutions & Consulting",
+        address: "33/2 ถนนพหลโยธิน เขตจตุจักร กรุงเทพฯ",
+        image: "https://via.placeholder.com/150/778899"
+      },
+      nam: {
+        id: "nam",
+        name: "Nam Pirun",
+        position: "Cloud Engineer",
+        email: "nam@cloudhub.asia",
+        phone: "090-123-4321",
+        website: "www.cloudhub.asia",
+        business: "Cloud & DevOps Services",
+        address: "อุทยานนวัตกรรมดิจิทัล พัทยา",
+        image: "https://via.placeholder.com/150/87CEFA"
+      }
+    };
+
+
+    const query = new URLSearchParams(window.location.search);
+    const id = query.get("id");
+    const isClean = query.get("view") === "clean";
+    const container = document.getElementById("cards");
+
+    if (id) {
+      container.className = "max-w-screen-xl mx-auto p-6"; // แบบเต็มหน้ากว้าง
+    } else {
+      container.className = "max-w-screen-xl mx-auto p-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"; // แบบแถวละ 5
+    }
+
+
+    function generateQRCode(url) {
+      return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(url)}`;
+    }
+
+    const companyLogo = `<img src="scr/logo.png" alt="Company Logo" class="h-10 mb-4 mx-auto">`;
+
+    if (id) {
+      if (profiles[id]) {
+        const profile = profiles[id];
+        const shareUrl = `${window.location.origin}${window.location.pathname}?id=${id}&view=clean`;
+
+        container.innerHTML = `
+          <div class="flex flex-col gap-6 lg:flex-row justify-center items-start w-full">
+            <div class="flex flex-col justify-center items-center gap-4 lg:w-1/3 w-full" ${isClean ? 'style="display:none"' : ''}>
+              <button onclick="window.location.href='index.html'" class="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                ← กลับหน้ารวม
+              </button>
+              <button onclick="shareProfile('${shareUrl}')" class="w-full bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                📤 แชร์ลิงก์นามบัตร
+              </button>
+              <img src="${generateQRCode(shareUrl)}" alt="QR Code" class="mt-4 shadow border rounded bg-white" />
+            </div>
+            <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 w-full max-w-2xl text-center">
+              ${companyLogo}
+              <img src="${profile.image}" class="w-36 h-36 rounded-full border-4 border-primary shadow mb-4 mx-auto" />
+              <h1 class="text-2xl font-bold text-gray-900 dark:text-white">${profile.name}</h1>
+              <p class="text-lg text-gray-500 dark:text-gray-300 mb-6">${profile.position}</p>
+              <div class="text-base space-y-2 text-left max-w-xl mx-auto">
+                <p><strong>📧 อีเมล:</strong> ${profile.email}</p>
+                <p><strong>📞 เบอร์:</strong> ${profile.phone}</p>
+                <p><strong>🌐 เว็บไซต์:</strong> ${profile.website}</p>
+                <p><strong>🏢 ธุรกิจ:</strong> ${profile.business}</p>
+                <p><strong>📍 ที่อยู่:</strong> ${profile.address}</p>
+              </div>
+            </div>
+          </div>`;
+
+        if (isClean) {
+          document.getElementById("mainHeader")?.classList.add("hidden");
+          document.getElementById("mainFooter")?.classList.add("hidden");
+        }
+      } else {
+        container.innerHTML = `<p class="text-center text-red-500 text-xl">ไม่พบนามบัตรของบุคคลนี้</p>`;
+      }
+    } else {
+      Object.values(profiles).forEach(profile => {
+        container.innerHTML += `
+          <div onclick="location.href='?id=${profile.id}'" class="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 hover:shadow-lg hover:scale-105 cursor-pointer max-w-md mx-auto">
+            ${companyLogo}
+            <div class="flex items-center space-x-4">
+              <img src="${profile.image}" class="w-20 h-20 rounded-full border-2 border-primary shadow" />
+              <div>
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">${profile.name}</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-300">${profile.position}</p>
+              </div>
+            </div>
+            <div class="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-1">
+              <p>📧 ${profile.email}</p>
+              <p>📞 ${profile.phone}</p>
+              <p>🌐 ${profile.website}</p>
+            </div>
+          </div>`;
+      });
+    }
+
+    function shareProfile(url) {
+      if (navigator.share) {
+        navigator.share({ title: 'นามบัตรของฉัน', url: url }).catch(console.error);
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          alert("📋 คัดลอกลิงก์เรียบร้อยแล้ว!");
+        });
+      }
+    }
+
+    // Dark Mode Toggle
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+    document.getElementById('themeToggleMobile')?.addEventListener('click', toggleTheme);
+    document.getElementById('menuToggle')?.addEventListener('click', () => {
+      document.getElementById('mobileMenu')?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
